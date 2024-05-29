@@ -8,17 +8,20 @@ import {
   Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { SigninDto, signupDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
-  signup(@Body() createAuthDto: CreateAuthDto) {
-    console.log(createAuthDto);
-    return this.authService.signup(createAuthDto);
+  signup(@Body() signupDto: signupDto) {
+    console.log(signupDto);
+    return this.authService.signup(signupDto);
+  }
+  @Post('signin')
+  signin(@Body() signinDto: SigninDto) {
+    return this.authService.signin(signinDto);
   }
 
   // @Get()
@@ -41,3 +44,4 @@ export class AuthController {
   //   return this.authService.remove(+id);
   // }
 }
+

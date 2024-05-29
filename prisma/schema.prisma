@@ -17,12 +17,12 @@ model User {
   id               String          @id @default(uuid())
   hash             String
   name             String
-  email            String
-  role             Role            @default(USER)
+  email            String          @unique
+  role             Role?           @default(USER)
   writtenPosts     Post[]          @relation("writtenPosts")
   favouritePosts   Post[]          @relation("favouritePosts")
-  createdAt        DateTime
-  updatedAt        DateTime
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
   userPreference   UserPreference? @relation(fields: [userPreferenceId], references: [id])
   userPreferenceId String?         @unique
 }
